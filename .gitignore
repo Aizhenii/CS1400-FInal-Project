@@ -1,0 +1,28 @@
+# Ignore build directories
+/build/
+/bin/
+
+# Ignore object files and executables
+*.o
+*.obj
+*.out
+main  # Ignore the compiled executable
+
+# Ignore IDE-specific directories
+.vscode/
+.idea/
+
+# Ignore temporary files
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# CMake-specific files (if using CMake)
+CMakeCache.txt
+CMakeFiles/
+CMakeLists.txt.user
+
+# Ignore dependency directories (if using other dependencies)
+node_modules/
