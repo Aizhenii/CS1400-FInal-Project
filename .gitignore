@@ -1,12 +1,14 @@
 # Ignore build directories
 /build/
 /bin/
+/out/
 
 # Ignore object files and executables
 *.o
 *.obj
 *.out
-main  # Ignore the compiled executable
+*.dSYM
+main
 
 # Ignore IDE-specific directories
 .vscode/
@@ -18,6 +20,7 @@ main  # Ignore the compiled executable
 *.bak
 *.swp
 *.swo
+*.DS_Store
 
 # CMake-specific files (if using CMake)
 CMakeCache.txt
