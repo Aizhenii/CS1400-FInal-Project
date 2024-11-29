@@ -1,5 +1,6 @@
 #include <SDL2/SDL.h>
 #include <iostream>
+#include "Game.hpp" 
 
 void drawGrid(SDL_Renderer* gRenderer, int screenWidth, int screenHeight);
 
@@ -43,6 +44,9 @@ int main(int argc, char* argv[]) {
     bool running = true;
     SDL_Event event;
 
+    Game newGame = Game(renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
+    newGame.drawGrid();
+
     while (running) {
         // Handle events
         while (SDL_PollEvent(&event)) {
@@ -52,13 +56,11 @@ int main(int argc, char* argv[]) {
         }
 
         // Clear the screen
-        SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255); // Set background color to white
+        SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255); // Set background color
         SDL_RenderClear(renderer);
 
-        // Draw the grid
-        drawGrid(renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
-
-        // Present the renderer
+        newGame.showGrid();
+        
         SDL_RenderPresent(renderer);
 
         SDL_Delay(16); // ~60 FPS
@@ -72,26 +74,25 @@ int main(int argc, char* argv[]) {
     return 0;
 }
 
-void drawGrid(SDL_Renderer* gRenderer, int screenWidth, int screenHeight) {
-    const int gridDivisions = 20; // Number of cells in the grid
-    const int cellSize = screenHeight / gridDivisions;
+// void drawGrid(SDL_Renderer* gRenderer, int screenWidth, int screenHeight) {
+//     const int gridDivisions = 20; 
+//     const int cellSize = screenHeight / gridDivisions;
 
-    // Set draw color for the grid lines
-    SDL_SetRenderDrawColor(gRenderer, 150, 150, 150, 255); 
+//     SDL_SetRenderDrawColor(gRenderer, 150, 150, 150, 255); // grayish lines
 
-    // Horizontal lines
-    for (int i = 0; i <= gridDivisions; ++i) {
-        int y = i * cellSize;
-        SDL_RenderDrawLine(gRenderer, 0, y, screenHeight, y);
-    }
+//     // Horizontal lines
+//     for (int i = 0; i <= gridDivisions; ++i) {
+//         int y = i * cellSize;
+//         SDL_RenderDrawLine(gRenderer, 0, y, screenHeight, y);
+//     }
 
-    // Vertical lines
-    for (int i = 0; i <= gridDivisions; ++i) {
-        int x = i * cellSize;
-        SDL_RenderDrawLine(gRenderer, x, 0, x, screenHeight);
-    }
+//     // Vertical lines
+//     for (int i = 0; i <= gridDivisions; ++i) {
+//         int x = i * cellSize;
+//         SDL_RenderDrawLine(gRenderer, x, 0, x, screenHeight);
+//     }
 
-    //draws a seperating line in the middle
-    SDL_SetRenderDrawColor(gRenderer, 255, 255, 255, 255); 
-    SDL_RenderDrawLine(gRenderer, 0, screenHeight/2, screenHeight, screenHeight/2);
-}
+//     //draws a seperating line in the middle
+//     SDL_SetRenderDrawColor(gRenderer, 255, 255, 255, 255); 
+//     SDL_RenderDrawLine(gRenderer, 0, screenHeight/2, screenHeight, screenHeight/2);
+// }
