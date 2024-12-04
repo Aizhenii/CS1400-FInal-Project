@@ -11,7 +11,6 @@ class Square : public Shape {
         void drawSquare();
 
     private:
-        SDL_Texture* SquareTexture; 
         int sideLength;
 
 };
