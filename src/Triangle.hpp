@@ -9,12 +9,14 @@ class Triangle : public Shape {
         Triangle(SDL_Renderer* gRenderer, int gridSize);
 
         void drawTriangle();
+        void rotateTriangle(int dir);
 
     private:
         int sideLength;
         SDL_Vertex triangleVertices[3];
 
         void setColorVertex(int vIndex);
+        void setVertexPosition(int vIndex, int x, int y);
 
 };
 

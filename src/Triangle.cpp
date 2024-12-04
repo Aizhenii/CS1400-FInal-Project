@@ -2,21 +2,20 @@
 
 Triangle::Triangle(SDL_Renderer* gRenderer, int gridSize) : Shape(gRenderer, gridSize) {
     sideLength = gridSize;
+
+    setVertexPosition(0, x + sideLength/2, y);
+    setColorVertex(0);
+
+    setVertexPosition(1, x, y + sideLength);
+    setColorVertex(1);
+
+    setVertexPosition(2, x + sideLength, y + sideLength);
+    setColorVertex(2);
 }
 
 // drawing a triangle in sdl is so complicated
+//maybe it would be better to create a texture for tiranlge
 void Triangle::drawTriangle() {
-    triangleVertices[0].position.x = x + sideLength/2;
-    triangleVertices[0].position.y = y;
-    setColorVertex(0);
-
-    triangleVertices[1].position.x = x;
-    triangleVertices[1].position.y = y + sideLength;
-    setColorVertex(1);
-
-    triangleVertices[2].position.x = x + sideLength;
-    triangleVertices[2].position.y = y + sideLength;
-    setColorVertex(2);
 
     SDL_RenderGeometry(renderer, NULL, triangleVertices, 3, NULL, 3);
 }
@@ -27,4 +26,66 @@ void Triangle::setColorVertex(int vIndex) {
     triangleVertices[vIndex].color.g = color.g;
     triangleVertices[vIndex].color.b = color.b;
     triangleVertices[vIndex].color.a = color.a;
+}
+
+void Triangle::setVertexPosition(int vIndex, int x, int y) {
+    triangleVertices[vIndex].position.x = x;
+    triangleVertices[vIndex].position.y = y;
+}
+
+void Triangle::rotateTriangle(int dir) {
+    enum Direction {
+        DOWN,
+        UP,
+        LEFT,
+        RIGHT,
+    };
+
+    // ugly code idk how to make it better :(
+    switch (dir) {
+        case DOWN:
+            setVertexPosition(0, x + sideLength/2, sideLength);
+            setColorVertex(0);
+
+            setVertexPosition(1, x, y);
+            setColorVertex(1);
+
+            setVertexPosition(2, x + sideLength, y);
+            setColorVertex(2);
+            break;
+
+        case UP:
+            setVertexPosition(0, x + sideLength/2, y);
+            setColorVertex(0);
+
+            setVertexPosition(1, x, y + sideLength);
+            setColorVertex(1);
+
+            setVertexPosition(2, x + sideLength, y + sideLength);
+            setColorVertex(2);
+            break;
+
+        case LEFT:
+            setVertexPosition(0, x, y + sideLength/2);
+            setColorVertex(0);
+
+            setVertexPosition(1, x + sideLength, y);
+            setColorVertex(1);
+
+            setVertexPosition(2, x + sideLength,  y + sideLength);
+            setColorVertex(2);
+            break;
+
+        case RIGHT:
+            setVertexPosition(0, x + sideLength, y + sideLength/2);
+            setColorVertex(0);
+
+            setVertexPosition(1, x, y);
+            setColorVertex(1);
+
+            setVertexPosition(2, x, y + sideLength);
+            setColorVertex(2);
+            break;
+
+    }
 }
