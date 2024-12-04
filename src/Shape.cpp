@@ -4,6 +4,7 @@
 Shape::Shape(SDL_Renderer* gRenderer, int gSize) {
     renderer = gRenderer;
     gridSize = gSize;
+    
     // lets color originally be white
     color.r = 255;
     color.g = 255;
@@ -23,19 +24,18 @@ void Shape::setColor(SDL_Color c) {
 }
 
 void Shape::moveShape(int dir) {
-    //int movementSize = numGrids//when to use pointers? 
 
     switch(dir) {
-        case 0:
+        case 0: // up
             y += gridSize;
             break;
-        case 1:
+        case 1: // down
             y -= gridSize;
             break;
-        case 2:
+        case 2: // left
             x -= gridSize;
             break;
-        case 3:
+        case 3: // right
             x += gridSize;
             break;
     }

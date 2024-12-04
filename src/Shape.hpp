@@ -20,4 +20,4 @@ class Shape {
         int y;
 };
 
-#endif // GAME_HPP
+#endif 
