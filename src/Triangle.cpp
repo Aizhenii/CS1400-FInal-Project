@@ -33,7 +33,7 @@ void Triangle::rotateTriangle(int dir) {
     // ugly code idk how to make it better :(
     switch (dir) {
         case DOWN:
-            setVertexPosition(0, x + sideLength/2, sideLength);
+            setVertexPosition(0, x + sideLength/2, y + sideLength);
             setColorVertex(0);
 
             setVertexPosition(1, x, y);
