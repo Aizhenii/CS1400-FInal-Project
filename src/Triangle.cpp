@@ -1,16 +1,11 @@
 #include "Triangle.hpp"
 
-Triangle::Triangle(SDL_Renderer* gRenderer, int gridSize) : Shape(gRenderer, gridSize) {
+Triangle::Triangle(SDL_Renderer* gRenderer, int gridSize, int dir) : Shape(gRenderer, gridSize) {
     sideLength = gridSize;
+    direction = dir;
 
-    setVertexPosition(0, x + sideLength/2, y);
-    setColorVertex(0);
+    rotateTriangle(dir);
 
-    setVertexPosition(1, x, y + sideLength);
-    setColorVertex(1);
-
-    setVertexPosition(2, x + sideLength, y + sideLength);
-    setColorVertex(2);
 }
 
 // drawing a triangle in sdl is so complicated
@@ -86,18 +81,13 @@ void Triangle::rotateTriangle(int dir) {
 
 void Triangle::moveShape(int dir) {
     Shape::moveShape(dir); 
-
-    // Recalculate vertex positions
-    setVertexPosition(0, x + sideLength / 2, y);
-    setVertexPosition(1, x, y + sideLength);
-    setVertexPosition(2, x + sideLength, y + sideLength);
+    
+    rotateTriangle(direction);
 }
 
 void Triangle::setPos(int xPos, int yPos) {
     Shape::setPos(xPos, yPos); 
 
     // Recalculate vertex positions
-    setVertexPosition(0, x + sideLength / 2, y);
-    setVertexPosition(1, x, y + sideLength);
-    setVertexPosition(2, x + sideLength, y + sideLength);
+    rotateTriangle(direction);
 }

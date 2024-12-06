@@ -6,20 +6,21 @@
 
 class Triangle : public Shape {
     public:
-        Triangle(SDL_Renderer* gRenderer, int gridSize);
+        Triangle(SDL_Renderer* gRenderer, int gridSize, int dir);
 
         void drawShape() override;
         void moveShape(int dir) override;
         void setPos(int xPos, int yPos) override;
 
-        void rotateTriangle(int dir);
 
     private:
         int sideLength;
+        int direction;
         SDL_Vertex triangleVertices[3];
 
         void setColorVertex(int vIndex);
         void setVertexPosition(int vIndex, int x, int y);
+        void rotateTriangle(int dir);
 
 };
 
