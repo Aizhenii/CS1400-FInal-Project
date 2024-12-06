@@ -1,6 +1,9 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 #include "Game.hpp" 
+#include "Square.hpp"
+#include "Triangle.hpp"
+#include "GamePiece.hpp"
 
 void drawGrid(SDL_Renderer* gRenderer, int screenWidth, int screenHeight);
 
@@ -17,7 +20,7 @@ int main(int argc, char* argv[]) {
 
     // Create a window
     SDL_Window* window = SDL_CreateWindow(
-        "SDL2 Test Window",         // Title of the window
+        "C++ Game",         // Title of the window
         SDL_WINDOWPOS_CENTERED,     // Initial X position
         SDL_WINDOWPOS_CENTERED,     // Initial Y position
         SCREEN_WIDTH,               // Width
@@ -40,18 +43,60 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    // Game loop
     bool running = true;
     SDL_Event event;
 
     Game newGame = Game(renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
     newGame.drawGrid();
+    int gridSize = newGame.getGridSize();
 
+    std::vector<std::unique_ptr<Shape>> shapes;
+    shapes.push_back(std::make_unique<Square>(renderer, gridSize)); /
+
+    //Square s = Square(renderer, gridSize);
+    //Triangle t = Triangle(renderer, gridSize);
+
+    GamePiece g1 = GamePiece(renderer, gridSize);
+
+    enum Direction {
+        UP,
+        DOWN,
+        LEFT,
+        RIGHT,
+    };
+
+    // Game loop
     while (running) {
+        int dir = 0;
+
         // Handle events
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
                 running = false;
+            }
+            else if ( event.type == SDL_KEYDOWN) {
+                //std::cout << "Key!" << std::endl;
+                switch (event.key.keysym.sym) {
+                    case SDLK_UP:
+                        dir = UP;
+                        //std::cout << "Key up!" << std::endl;
+                        break;
+                    case SDLK_DOWN:
+                        dir = DOWN;
+                        //std::cout << "Key down!" << std::endl;
+                        break;
+                    case SDLK_LEFT:
+                        dir = LEFT;
+                        break;
+                    case SDLK_RIGHT:
+                        dir = RIGHT;
+                        break;
+                }
+
+                // s.moveShape(dir); 
+                // t.rotateTriangle(dir);
+                //t.moveShape(dir);
+                g1.moveGamePiece(dir);
             }
         }
 
@@ -60,6 +105,19 @@ int main(int argc, char* argv[]) {
         SDL_RenderClear(renderer);
 
         newGame.showGrid();
+
+        g1.displayGamePiece();
+
+        // shapes.at(0)->drawShape(); 
+        // for (const auto& s: shapes) {
+        //     //s.moveShape(dir);
+        //     s->drawShape(); //only draw shape doesnl't work for some reason
+        //  }
+
+        //s.setPos(0, 0);
+        
+        // s.drawSquare();
+        //t.drawShape();
         
         SDL_RenderPresent(renderer);
 
@@ -73,26 +131,3 @@ int main(int argc, char* argv[]) {
 
     return 0;
 }
-
-// void drawGrid(SDL_Renderer* gRenderer, int screenWidth, int screenHeight) {
-//     const int gridDivisions = 20; 
-//     const int cellSize = screenHeight / gridDivisions;
-
-//     SDL_SetRenderDrawColor(gRenderer, 150, 150, 150, 255); // grayish lines
-
-//     // Horizontal lines
-//     for (int i = 0; i <= gridDivisions; ++i) {
-//         int y = i * cellSize;
-//         SDL_RenderDrawLine(gRenderer, 0, y, screenHeight, y);
-//     }
-
-//     // Vertical lines
-//     for (int i = 0; i <= gridDivisions; ++i) {
-//         int x = i * cellSize;
-//         SDL_RenderDrawLine(gRenderer, x, 0, x, screenHeight);
-//     }
-
-//     //draws a seperating line in the middle
-//     SDL_SetRenderDrawColor(gRenderer, 255, 255, 255, 255); 
-//     SDL_RenderDrawLine(gRenderer, 0, screenHeight/2, screenHeight, screenHeight/2);
-// }

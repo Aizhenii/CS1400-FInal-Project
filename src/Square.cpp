@@ -5,7 +5,7 @@ Square::Square(SDL_Renderer* gRenderer, int gridSize) : Shape(gRenderer, gridSiz
     sideLength = gridSize;
 }
 
-void Square::drawSquare() {
+void Square::drawShape() {
     SDL_Rect rect = { x, y, sideLength, sideLength };
     SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
     SDL_RenderDrawRect(renderer, &rect);

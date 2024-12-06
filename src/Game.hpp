@@ -13,11 +13,14 @@ class Game {
         // display the grid texture
         void showGrid(); 
 
+        int getGridSize();
+
     private:
         SDL_Renderer* renderer;
+        SDL_Texture* gridTexture; // Creating a grid texture that we can reuse
         int sWidth;
         int sHeight;
-        SDL_Texture* gridTexture; // Creating a grid texture that we can reuse
+        int gridSize;
 
 };
 
