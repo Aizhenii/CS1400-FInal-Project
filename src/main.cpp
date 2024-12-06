@@ -51,7 +51,7 @@ int main(int argc, char* argv[]) {
     int gridSize = newGame.getGridSize();
 
     std::vector<std::unique_ptr<Shape>> shapes;
-    shapes.push_back(std::make_unique<Square>(renderer, gridSize)); /
+    shapes.push_back(std::make_unique<Square>(renderer, gridSize)); 
 
     //Square s = Square(renderer, gridSize);
     //Triangle t = Triangle(renderer, gridSize);
