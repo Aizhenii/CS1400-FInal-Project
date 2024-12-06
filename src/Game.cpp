@@ -16,6 +16,8 @@ void Game::drawGrid() {
         return;
     }
 
+    // SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0"); // Disable linear filtering
+
     SDL_Renderer* tempRenderer = SDL_CreateSoftwareRenderer(gridSurface);
     if (!tempRenderer) {
         std::cerr << "Failed to create temporary renderer: " << SDL_GetError() << std::endl;
@@ -25,6 +27,7 @@ void Game::drawGrid() {
 
     const int gridDivisions = 20; 
     const int cellSize = sHeight / gridDivisions;
+    gridSize = cellSize;
 
     SDL_SetRenderDrawColor(tempRenderer, 150, 150, 150, 255); // Grayish lines
 
@@ -58,3 +61,7 @@ void Game::showGrid() {
         SDL_RenderCopy(renderer, gridTexture, NULL, NULL);
     }
 }
+
+int Game::getGridSize() {
+    return gridSize;
+} 
