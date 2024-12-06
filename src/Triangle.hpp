@@ -10,6 +10,7 @@ class Triangle : public Shape {
 
         void drawShape() override;
         void moveShape(int dir) override;
+        void setPos(int xPos, int yPos) override;
 
         void rotateTriangle(int dir);
 

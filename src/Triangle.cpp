@@ -98,3 +98,12 @@ void Triangle::moveShape(int dir) {
     setVertexPosition(1, x, y + sideLength);
     setVertexPosition(2, x + sideLength, y + sideLength);
 }
+
+void Triangle::setPos(int xPos, int yPos) {
+    Shape::setPos(xPos, yPos); 
+
+    // Recalculate vertex positions
+    setVertexPosition(0, x + sideLength / 2, y);
+    setVertexPosition(1, x, y + sideLength);
+    setVertexPosition(2, x + sideLength, y + sideLength);
+}
