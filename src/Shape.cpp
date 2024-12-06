@@ -4,7 +4,7 @@
 Shape::Shape(SDL_Renderer* gRenderer, int gSize) {
     renderer = gRenderer;
     gridSize = gSize;
-    
+
     // lets color originally be white
     color.r = 255;
     color.g = 255;
@@ -17,6 +17,14 @@ Shape::Shape(SDL_Renderer* gRenderer, int gSize) {
 void Shape::setPos(int xPos, int yPos) {
     x = xPos;
     y = yPos;
+}
+
+int Shape::getX() {
+    return x;
+}
+
+int Shape::getY() {
+    return y;
 }
 
 void Shape::setColor(SDL_Color c) {

@@ -8,7 +8,9 @@ class Triangle : public Shape {
     public:
         Triangle(SDL_Renderer* gRenderer, int gridSize);
 
-        void drawTriangle();
+        void drawShape() override;
+        void moveShape(int dir) override;
+
         void rotateTriangle(int dir);
 
     private:

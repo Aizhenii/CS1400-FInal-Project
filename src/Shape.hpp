@@ -10,7 +10,13 @@ class Shape {
 
         void setPos(int xPos, int yPos);
         void setColor(SDL_Color c);
-        void moveShape(int dir);
+
+        virtual ~Shape() = default;
+        virtual void drawShape() = 0; // = 0 since there is nothing declared in the base drawShape function
+        virtual void moveShape(int dir);
+
+        int getX();
+        int getY();
 
     protected:
         SDL_Renderer* renderer;

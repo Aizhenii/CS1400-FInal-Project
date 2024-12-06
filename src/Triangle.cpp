@@ -15,7 +15,7 @@ Triangle::Triangle(SDL_Renderer* gRenderer, int gridSize) : Shape(gRenderer, gri
 
 // drawing a triangle in sdl is so complicated
 //maybe it would be better to create a texture for tiranlge
-void Triangle::drawTriangle() {
+void Triangle::drawShape() {
 
     SDL_RenderGeometry(renderer, NULL, triangleVertices, 3, NULL, 3);
 }
@@ -88,4 +88,13 @@ void Triangle::rotateTriangle(int dir) {
             break;
 
     }
+}
+
+void Triangle::moveShape(int dir) {
+    Shape::moveShape(dir); 
+
+    // Recalculate vertex positions
+    setVertexPosition(0, x + sideLength / 2, y);
+    setVertexPosition(1, x, y + sideLength);
+    setVertexPosition(2, x + sideLength, y + sideLength);
 }

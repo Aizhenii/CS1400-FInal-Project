@@ -8,7 +8,7 @@ class Square : public Shape {
     public:
         Square(SDL_Renderer* gRenderer, int gridSize);
 
-        void drawSquare();
+        void drawShape() override;
 
     private:
         int sideLength;
