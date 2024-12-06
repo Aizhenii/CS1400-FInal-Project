@@ -20,7 +20,12 @@ class GamePiece {
 
         void createGamePiece();
 
-
+        enum ShapeDirection {
+            UP,
+            DOWN,
+            LEFT,
+            RIGHT,
+        };
 };
 
 #endif 
