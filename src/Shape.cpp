@@ -34,16 +34,16 @@ void Shape::setColor(SDL_Color c) {
 void Shape::moveShape(int dir) {
 
     switch(dir) {
-        case 0: // up
+        case UP: // up
             y += gridSize;
             break;
-        case 1: // down
+        case DOWN: // down
             y -= gridSize;
             break;
-        case 2: // left
+        case LEFT: // left
             x -= gridSize;
             break;
-        case 3: // right
+        case RIGHT: // right
             x += gridSize;
             break;
     }

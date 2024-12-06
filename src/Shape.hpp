@@ -24,6 +24,14 @@ class Shape {
         int gridSize;
         int x;
         int y;
+
+        enum Direction {
+            UP,
+            DOWN,
+            LEFT,
+            RIGHT,
+        };
+
 };
 
 #endif 

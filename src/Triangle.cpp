@@ -34,12 +34,6 @@ void Triangle::setVertexPosition(int vIndex, int x, int y) {
 }
 
 void Triangle::rotateTriangle(int dir) {
-    enum Direction {
-        DOWN,
-        UP,
-        LEFT,
-        RIGHT,
-    };
 
     // ugly code idk how to make it better :(
     switch (dir) {
