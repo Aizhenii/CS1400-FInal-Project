@@ -12,20 +12,28 @@ class GamePiece {
 
         void displayGamePiece();
         void moveGamePiece(int dir);
+        void createGamePiece(int x, int y);
+        bool mouseOverGamePiece();
+        void highlightGamePiece();
     
     private:
         SDL_Renderer* renderer;
         std::vector<std::unique_ptr<Shape>> shapes;
+
+        SDL_Rect horizontalBorder;
+        SDL_Rect verticalBorder;
+   
         int gridSize;
-
-        void createGamePiece();
-
+        bool mouseOver = false;
+        
         enum ShapeDirection {
             UP,
             DOWN,
             LEFT,
             RIGHT,
         };
+
+        void calculateBorder();
 };
 
 #endif 

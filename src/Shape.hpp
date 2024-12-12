@@ -9,21 +9,25 @@ class Shape {
         Shape(SDL_Renderer* gRenderer, int gSize);
 
         void setColor(SDL_Color c);
+        int getX();
+        int getY();
+        SDL_Color getColor();
+        SDL_Color getOriginalColor();
 
         virtual ~Shape() = default;
         virtual void drawShape() = 0; // = 0 since there is nothing declared in the base drawShape function
         virtual void moveShape(int dir);
         virtual void setPos(int xPos, int yPos);
 
-        int getX();
-        int getY();
 
     protected:
         SDL_Renderer* renderer;
         SDL_Color color;
+        SDL_Color originalColor = {255, 255, 255};
         int gridSize;
         int x;
         int y;
+        
 
         enum Direction {
             UP,

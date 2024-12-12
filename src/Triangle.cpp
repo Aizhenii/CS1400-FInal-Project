@@ -4,6 +4,10 @@ Triangle::Triangle(SDL_Renderer* gRenderer, int gridSize, int dir) : Shape(gRend
     sideLength = gridSize;
     direction = dir;
 
+    //setColor(originalColor);
+    originalColor = {255, 250, 224};
+    
+
     rotateTriangle(dir);
 
 }
@@ -11,6 +15,9 @@ Triangle::Triangle(SDL_Renderer* gRenderer, int gridSize, int dir) : Shape(gRend
 // drawing a triangle in sdl is so complicated
 //maybe it would be better to create a texture for tiranlge
 void Triangle::drawShape() {
+    setColorVertex(0);
+    setColorVertex(1);
+    setColorVertex(2);
 
     SDL_RenderGeometry(renderer, NULL, triangleVertices, 3, NULL, 3);
 }
