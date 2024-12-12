@@ -57,6 +57,9 @@ int main(int argc, char* argv[]) {
     //Triangle t = Triangle(renderer, gridSize);
 
     GamePiece g1 = GamePiece(renderer, gridSize);
+    g1.createGamePiece(5, 5);
+    GamePiece g2 = GamePiece(renderer, gridSize);
+    g2.createGamePiece(8, 5);
 
     enum Direction {
         UP,
@@ -96,9 +99,22 @@ int main(int argc, char* argv[]) {
                 // s.moveShape(dir); 
                 // t.rotateTriangle(dir);
                 //t.moveShape(dir);
+
+                // only move if it is selected
                 g1.moveGamePiece(dir);
+                g2.moveGamePiece(dir);
             }
-        }
+            else if (event.type == SDL_MOUSEBUTTONDOWN) {
+                // I can add this function to the game class
+                if (g1.mouseOverGamePiece()) {
+                    g1.selectGamePiece(true);
+                    //std::cout << "click" << std::endl;
+                }
+                else {
+                    g1.selectGamePiece(false);
+                }
+            }
+        }   
 
         // Clear the screen
         SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255); // Set background color
@@ -106,7 +122,14 @@ int main(int argc, char* argv[]) {
 
         newGame.showGrid();
 
+
+        g1.mouseOverGamePiece();
+        g2.mouseOverGamePiece();
+
         g1.displayGamePiece();
+        g2.displayGamePiece();
+        //g1.highlightGamePiece();
+        
 
         // shapes.at(0)->drawShape(); 
         // for (const auto& s: shapes) {

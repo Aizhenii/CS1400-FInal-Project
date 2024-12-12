@@ -15,6 +15,7 @@ class GamePiece {
         void createGamePiece(int x, int y);
         bool mouseOverGamePiece();
         void highlightGamePiece();
+        void selectGamePiece(bool sel);
     
     private:
         SDL_Renderer* renderer;
@@ -25,6 +26,7 @@ class GamePiece {
    
         int gridSize;
         bool mouseOver = false;
+        bool selected = false;
         
         enum ShapeDirection {
             UP,

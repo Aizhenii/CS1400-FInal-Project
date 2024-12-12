@@ -103,7 +103,7 @@ void GamePiece::highlightGamePiece() {
         highlightColor.g += ogColor.g;
         highlightColor.b += ogColor.b;
 
-        if (mouseOver) {
+        if (mouseOver || selected) {
             s->setColor(highlightColor);
         }
         else {
@@ -127,4 +127,9 @@ void GamePiece::calculateBorder() {
     verticalBorder.y = s->getY() - gridSize;           
     verticalBorder.w = gridSize;                     
     verticalBorder.h = 3 * gridSize;
+}
+
+void GamePiece::selectGamePiece(bool sel) {
+    selected = sel;
+    highlightGamePiece();
 }
