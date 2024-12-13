@@ -68,6 +68,8 @@ int main(int argc, char* argv[]) {
         RIGHT,
     };
 
+    bool selected = false;
+
     // Game loop
     while (running) {
         int dir = 0;
@@ -101,20 +103,27 @@ int main(int argc, char* argv[]) {
                 //t.moveShape(dir);
 
                 // only move if it is selected
-                g1.moveGamePiece(dir);
-                g2.moveGamePiece(dir);
+                if (selected) {
+                    g1.moveGamePiece(dir);
+                    //g2.moveGamePiece(dir);
+                }
             }
-            else if (event.type == SDL_MOUSEBUTTONDOWN) {
+
+            if (event.type == SDL_MOUSEBUTTONDOWN) {
                 // I can add this function to the game class
                 if (g1.mouseOverGamePiece()) {
                     g1.selectGamePiece(true);
+                    selected = true;
                     //std::cout << "click" << std::endl;
                 }
                 else {
                     g1.selectGamePiece(false);
+                    selected = false;
                 }
             }
         }   
+
+
 
         // Clear the screen
         SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255); // Set background color
