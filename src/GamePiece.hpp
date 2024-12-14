@@ -16,6 +16,9 @@ class GamePiece {
         bool mouseOverGamePiece();
         void highlightGamePiece();
         void selectGamePiece(bool sel);
+        void checkCollision(GamePiece& gp);
+        std::vector<std::unique_ptr<Shape>>& getShapeVector();
+        
     
     private:
         SDL_Renderer* renderer;

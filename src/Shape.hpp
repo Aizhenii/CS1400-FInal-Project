@@ -13,6 +13,7 @@ class Shape {
         int getY();
         SDL_Color getColor();
         SDL_Color getOriginalColor();
+        bool collides(Shape& s);
 
         virtual ~Shape() = default;
         virtual void drawShape() = 0; // = 0 since there is nothing declared in the base drawShape function

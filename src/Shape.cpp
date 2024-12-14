@@ -56,3 +56,11 @@ void Shape::moveShape(int dir) {
 
 }
 
+bool Shape::collides(Shape& s) {
+    if (x == s.getX() && y == s.getY()) {
+        return true;
+    }
+    
+    return false;
+}
+

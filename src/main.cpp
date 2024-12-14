@@ -105,6 +105,7 @@ int main(int argc, char* argv[]) {
                 // only move if it is selected
                 if (selected) {
                     g1.moveGamePiece(dir);
+                    g1.checkCollision(g2);
                     //g2.moveGamePiece(dir);
                 }
             }

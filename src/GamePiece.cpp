@@ -133,3 +133,32 @@ void GamePiece::selectGamePiece(bool sel) {
     selected = sel;
     highlightGamePiece();
 }
+
+std::vector<std::unique_ptr<Shape>>& GamePiece::getShapeVector() {
+    return shapes;
+}
+
+void GamePiece::checkCollision(GamePiece& gp) {
+
+    auto& gpShapes = gp.getShapeVector();
+
+    for (auto i = shapes.begin(); i != shapes.end(); ) {
+        bool shapeRemoved = false;
+
+        for (auto j = gpShapes.begin(); j != gpShapes.end(); ) {
+            if ((*i)->collides(**j)) {
+                i = shapes.erase(i); 
+                j = gpShapes.erase(j);
+                shapeRemoved = true;
+                break; 
+            } else {
+                ++j; 
+            }
+        }
+
+        if (!shapeRemoved) {
+            ++i; 
+        }
+    }
+
+}
