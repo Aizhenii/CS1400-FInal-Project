@@ -90,7 +90,8 @@ void Game::createGamePieceArray() {
 
 void Game::moveGamePieceVector(int dir) {
     // write an if else statement here and assign a reference to to vector based on it 
-    auto& gamePieces = player1 ? player1Vector : player2Vector;
+    //select the OTHER player's game piece vector
+    auto& gamePieces = player1 ? player2Vector : player1Vector;
 
     if (selectedGamePiece) {
             selectedGamePiece->moveGamePiece(dir);
