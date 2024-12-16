@@ -88,8 +88,6 @@ bool GamePiece::mouseOverGamePiece() {
 
     }
 
-    highlightGamePiece();
-
     return mouseOver;
         
 }
@@ -131,7 +129,6 @@ void GamePiece::calculateBorder() {
 
 void GamePiece::selectGamePiece(bool sel) {
     selected = sel;
-    highlightGamePiece();
 }
 
 std::vector<std::unique_ptr<Shape>>& GamePiece::getShapeVector() {
@@ -140,17 +137,41 @@ std::vector<std::unique_ptr<Shape>>& GamePiece::getShapeVector() {
 
 void GamePiece::checkCollision(GamePiece& gp) {
 
+    // using a reference to the vector
     auto& gpShapes = gp.getShapeVector();
 
     for (auto i = shapes.begin(); i != shapes.end(); ) {
         bool shapeRemoved = false;
 
+        // check if selected triangle hits the other gp square
+
         for (auto j = gpShapes.begin(); j != gpShapes.end(); ) {
             if ((*i)->collides(**j)) {
+                //If the selected square hits other square
+                if (i == shapes.begin() && j == gpShapes.begin()) {
+                    //retrict movement, set movement limit
+                    break;
+                }
+
+                // check if selected triangle hits the other gp square
+                else if (j == gpShapes.begin()) {
+                    gp.setAlive(false);
+                    // set the other game piece to not alive
+                    break;
+                }
+
+                // Check if the selected square hits other triangle 
+                else if (i == shapes.begin()) {
+                    // set this game piece to not alive
+                    alive = false;
+                    break;
+                }
+
                 i = shapes.erase(i); 
                 j = gpShapes.erase(j);
                 shapeRemoved = true;
                 break; 
+
             } else {
                 ++j; 
             }
@@ -161,4 +182,12 @@ void GamePiece::checkCollision(GamePiece& gp) {
         }
     }
 
+}
+
+bool GamePiece::getAlive() {
+    return alive;
+}
+
+void GamePiece::setAlive(bool a) {
+    alive = a;
 }

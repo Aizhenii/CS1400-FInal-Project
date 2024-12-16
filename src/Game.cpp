@@ -91,19 +91,33 @@ void Game::createGamePieceArray() {
 void Game::moveGamePieceVector(int dir) {
     // write an if else statement here and assign a reference to to vector based on it 
     //select the OTHER player's game piece vector
-    auto& gamePieces = player1 ? player2Vector : player1Vector;
+    auto& gamePieces1 = player1 ? player2Vector : player1Vector;
+    auto& gamePieces2 = player1 ? player1Vector : player2Vector;
 
     if (selectedGamePiece) {
             selectedGamePiece->moveGamePiece(dir);
 
             // Check collisions with other game pieces
-            for (auto i = gamePieces.begin(); i != gamePieces.end(); ++i) {
-                if ((*i).get() != selectedGamePiece) {
+            for (auto i = gamePieces1.begin(); i != gamePieces1.end();) {
                     selectedGamePiece->checkCollision(**i);
                     if (!(*i)->getAlive()) {
-                        i = gamePieces.erase(i); 
+                        i = gamePieces1.erase(i); 
                         break;
                     }
+                    else {
+                        ++i;
+                    }
+            }
+
+            if (!selectedGamePiece->getAlive()) {
+                auto it = std::find_if(
+                gamePieces2.begin(), gamePieces2.end(),
+                [this](const std::unique_ptr<GamePiece>& gp) {
+                    return gp.get() == selectedGamePiece;
+                }
+                );
+                if (it != gamePieces2.end()) {
+                    gamePieces2.erase(it);
                 }
             }
     }

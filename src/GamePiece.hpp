@@ -17,6 +17,8 @@ class GamePiece {
         void highlightGamePiece();
         void selectGamePiece(bool sel);
         void checkCollision(GamePiece& gp);
+        bool getAlive(); // checks if the base (or square in this case is hit) in collision, gp dies if base is erased
+        void setAlive(bool a);
         std::vector<std::unique_ptr<Shape>>& getShapeVector();
         
     
@@ -30,6 +32,9 @@ class GamePiece {
         int gridSize;
         bool mouseOver = false;
         bool selected = false;
+        bool alive = true;
+
+        int moveLimit = 2;
         
         enum ShapeDirection {
             UP,
