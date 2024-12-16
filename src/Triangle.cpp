@@ -4,10 +4,8 @@ Triangle::Triangle(SDL_Renderer* gRenderer, int gridSize, int dir) : Shape(gRend
     sideLength = gridSize;
     direction = dir;
 
-    //setColor(originalColor);
-    originalColor = {255, 250, 224};
+    originalColor = {255, 250, 224}; // light yellow
     
-
     rotateTriangle(dir);
 
 }
