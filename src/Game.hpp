@@ -21,6 +21,9 @@ class Game {
         void handleMouseClick();
         void createGamePieceArray();
 
+        void switchTurns();
+        void drawButtons();
+
     private:
         SDL_Renderer* renderer;
         SDL_Texture* gridTexture; // Creating a grid texture that we can reuse
@@ -36,6 +39,12 @@ class Game {
         std::vector<std::unique_ptr<GamePiece>> player2Vector;
 
         GamePiece* selectedGamePiece = nullptr;
+
+        SDL_Rect endButton1;
+        SDL_Rect endButton2;
+
+        void createButtons();
+
 
 
 };

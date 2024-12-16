@@ -86,6 +86,7 @@ void Game::createGamePieceArray() {
     std::cout << "Player 1 vector size: " << player1Vector.size() << std::endl;
     std::cout << "Player 2 vector size: " << player2Vector.size() << std::endl;
 
+    createButtons();
 }
 
 void Game::moveGamePieceVector(int dir) {
@@ -132,6 +133,8 @@ void Game::drawGamePieceVector() {
     for (const auto& gp2: player2Vector) {
         gp2->displayGamePiece();
     }
+
+    drawButtons();
 }
 
 void Game::highlightGamePieceVector() {
@@ -158,4 +161,51 @@ void Game::handleMouseClick() {
         }
     }
     
+}
+
+void Game::createButtons() {
+    endButton1.x = sHeight + 2*gridSize;
+    endButton1.y = 2*gridSize;
+    endButton1.w = 3*gridSize;
+    endButton1.h = 2*gridSize;
+
+    endButton2.x = endButton1.x;
+    endButton2.y = sHeight - endButton1.y - endButton1.h;
+    endButton2.w = endButton1.w;
+    endButton2.h = endButton1.h;
+
+}
+
+void Game::drawButtons() {
+    if (player1) {
+        SDL_SetRenderDrawColor(renderer, 235, 64, 52, 255); // set to red
+        SDL_RenderDrawRect(renderer, &endButton1);
+        SDL_RenderFillRect(renderer, &endButton1);
+
+        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+        SDL_RenderDrawRect(renderer, &endButton2);
+        SDL_RenderFillRect(renderer, &endButton2);
+    }
+    else {
+        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); // set to white
+        SDL_RenderDrawRect(renderer, &endButton1);
+        SDL_RenderFillRect(renderer, &endButton1);
+
+        SDL_SetRenderDrawColor(renderer, 235, 64, 52, 255); 
+        SDL_RenderDrawRect(renderer, &endButton2);
+        SDL_RenderFillRect(renderer, &endButton2);
+
+    }
+}
+
+void Game::switchTurns() {
+    auto& button = player1 ? endButton1 : endButton2;
+
+    int x, y;
+    SDL_GetMouseState(&x, &y);
+
+    if ((x > button.x && x < button.x + button.w) &&
+        y > button.y && y < button.y + button.h) {
+        player1 = !player1;
+    }
 }
