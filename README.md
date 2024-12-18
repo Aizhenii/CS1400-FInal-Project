@@ -1,4 +1,4 @@
-This is a simple two player stategy game. 
+This is a simple two player stategy game and my first time ever using C++.
 
 You have a set of game pieces on your side. Each turn you can only move each piece 2 grids. 
 You can end your turn any time by pressing the red button on the side. 
