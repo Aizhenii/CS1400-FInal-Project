@@ -6,9 +6,7 @@ Shape::Shape(SDL_Renderer* gRenderer, int gSize) {
     gridSize = gSize;
 
     // lets color originally be white
-    color.r = 255;
-    color.g = 255;
-    color.b = 255;
+    setColor(originalColor);
 
     // set original posiiton to 0, 0
     setPos(0, 0);
@@ -31,14 +29,22 @@ void Shape::setColor(SDL_Color c) {
     color = c;
 }
 
+SDL_Color Shape::getColor() {
+    return color;
+}
+
+SDL_Color Shape::getOriginalColor() {
+    return originalColor;
+}
+
 void Shape::moveShape(int dir) {
 
     switch(dir) {
         case UP: // up
-            y += gridSize;
+            y -= gridSize;
             break;
         case DOWN: // down
-            y -= gridSize;
+            y += gridSize;
             break;
         case LEFT: // left
             x -= gridSize;
@@ -48,5 +54,13 @@ void Shape::moveShape(int dir) {
             break;
     }
 
+}
+
+bool Shape::collides(Shape& s) {
+    if (x == s.getX() && y == s.getY()) {
+        return true;
+    }
+    
+    return false;
 }
 

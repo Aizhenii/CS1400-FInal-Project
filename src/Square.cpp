@@ -3,6 +3,8 @@
 
 Square::Square(SDL_Renderer* gRenderer, int gridSize) : Shape(gRenderer, gridSize) {
     sideLength = gridSize;
+
+    originalColor = {255, 149, 133}; // pink
 }
 
 void Square::drawShape() {

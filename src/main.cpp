@@ -1,4 +1,5 @@
 #include <SDL2/SDL.h>
+// #include <SDL2/SDL_ttf.h>
 #include <iostream>
 #include "Game.hpp" 
 #include "Square.hpp"
@@ -17,6 +18,11 @@ int main(int argc, char* argv[]) {
         std::cerr << "Failed to initialize SDL: " << SDL_GetError() << std::endl;
         return -1;
     }
+
+    // if (TTF_Init() == -1) {
+    //     std::cerr << "TTF_Init Error: " << TTF_GetError() << std::endl;
+    //     return 1;
+    // }
 
     // Create a window
     SDL_Window* window = SDL_CreateWindow(
@@ -49,14 +55,21 @@ int main(int argc, char* argv[]) {
     Game newGame = Game(renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
     newGame.drawGrid();
     int gridSize = newGame.getGridSize();
+    // std::cout<< gridSize << std::endl;
+    newGame.createGamePieceArray();
 
-    std::vector<std::unique_ptr<Shape>> shapes;
-    shapes.push_back(std::make_unique<Square>(renderer, gridSize)); 
+    // std::vector<std::unique_ptr<Shape>> shapes;
+    // shapes.push_back(std::make_unique<Square>(renderer, gridSize)); 
 
     //Square s = Square(renderer, gridSize);
     //Triangle t = Triangle(renderer, gridSize);
 
-    GamePiece g1 = GamePiece(renderer, gridSize);
+    // GamePiece g1 = GamePiece(renderer, gridSize);
+    // g1.createGamePiece(2, 2); 
+
+    // GamePiece g2 = GamePiece(renderer, gridSize);
+    // g2.createGamePiece(8, 5); 
+
 
     enum Direction {
         UP,
@@ -64,6 +77,9 @@ int main(int argc, char* argv[]) {
         LEFT,
         RIGHT,
     };
+
+    bool selected = false;
+    bool player1 = true;
 
     // Game loop
     while (running) {
@@ -93,12 +109,15 @@ int main(int argc, char* argv[]) {
                         break;
                 }
 
-                // s.moveShape(dir); 
-                // t.rotateTriangle(dir);
-                //t.moveShape(dir);
-                g1.moveGamePiece(dir);
+                newGame.moveGamePieceVector(dir);
             }
-        }
+
+            if (event.type == SDL_MOUSEBUTTONDOWN) {
+                newGame.handleMouseClick();
+            }
+        }   
+
+
 
         // Clear the screen
         SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255); // Set background color
@@ -106,22 +125,13 @@ int main(int argc, char* argv[]) {
 
         newGame.showGrid();
 
-        g1.displayGamePiece();
-
-        // shapes.at(0)->drawShape(); 
-        // for (const auto& s: shapes) {
-        //     //s.moveShape(dir);
-        //     s->drawShape(); //only draw shape doesnl't work for some reason
-        //  }
-
-        //s.setPos(0, 0);
-        
-        // s.drawSquare();
-        //t.drawShape();
+        newGame.drawGamePieceVector();
+        newGame.highlightGamePieceVector(); 
         
         SDL_RenderPresent(renderer);
 
         SDL_Delay(16); // ~60 FPS
+
     }
 
     // Clean up
