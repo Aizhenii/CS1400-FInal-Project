@@ -34,6 +34,22 @@ You can run the project by clicking the run button at the very bottom or running
 ```
 ./finalproject
 ```
+### Windows set up for Visual Studio
+Install [SDL2](https://github.com/libsdl-org/SDL/releases).
+Visual Studio natively supports [CMake](https://learn.microsoft.com/en-us/cpp/build/cmake-projects-in-visual-studio?view=msvc-170) with Desktop development with C++. 
 
+In CMakeLists.txt, update the following lines to your SDL2 paths. Replace file path inside the quotations that are BEFORE the CACHE PATH and CACHE FILEPATH.
+Note that the directory ends with an include folder and the library ends with and SDL2.lib file.
+```
+set(SDL2_INCLUDE_DIR "C:/libs/SDL2/include" CACHE PATH "Set path to SDL2 include directory (e.g., C:/libs/SDL2/include)")
+set(SDL2_LIBRARY "C:/libs/SDL2/lib/x64/SDL2.lib" CACHE FILEPATH "Set path to SDL2 library (e.g., C:/libs/SDL2/lib/x64/SDL2.lib)")
+```
+Open Developer Command Prompt for Visual Studio. Run the following command to generate a solution file (.sln). 
+```
+cmake -S . -B build -G "Visual Studio 16 2019"
+```
+
+Build the proect by selecting Build > Build Solution (or press Ctrl + Shift + B).
+Run the project by selecting Debug > Start Without Debugging (or press Ctrl + F5).
 
 
